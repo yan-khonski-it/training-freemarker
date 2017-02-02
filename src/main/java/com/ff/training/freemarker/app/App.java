@@ -9,6 +9,7 @@ import freemarker.template.TemplateExceptionHandler;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +31,14 @@ public class App {
             Template template = configuration.getTemplate("commonTemplate.ftl");
 
             // Console output
-            Writer out = new OutputStreamWriter(System.out);
+          //  Writer out = new OutputStreamWriter(System.out);
+           // template.process(prepareData(), out);
+           // out.flush();
+
+            Writer out = new StringWriter();
             template.process(prepareData(), out);
-            out.flush();
+            //out.flush();
+            System.out.println(out.toString());
 
         } catch (IOException | TemplateException e) {
             throw new RuntimeException(e);
@@ -50,8 +56,7 @@ public class App {
     private Map<String, Object> prepareData() {
         Model model = service.getModel();
         Map<String, Object> data = new HashMap<String, Object>();
-        data.put("userDetails", model.getUserDetails());
-        data.put("records", model.getRecords());
+        data.put("model", model);
         return data;
     }
 }

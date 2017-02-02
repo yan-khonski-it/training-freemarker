@@ -1,11 +1,11 @@
 <div>
     <div>
-        <h1>${userDetails.name}</h1>
-        ${userDetails.birthday}  ${userDetails.id}
+        <h1>${model.userDetails.name!}</h1>
+        ${model.userDetails.birthday}  ${model.userDetails.id}
     </div>
 
     <div>
-    <#list records>
+    <#list model.records>
         <table>
             <#items as record>
                 <tr>
